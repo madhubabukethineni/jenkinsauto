@@ -1,0 +1,61 @@
+# kind: PersistentVolume
+# apiVersion: v1
+# metadata:
+#   name: postgres-pv-volume
+#   labels:
+#     app: postgres
+# spec:
+#   storageClassName: standard-rwo
+#   capacity:
+#     storage: 40Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   gcePersistentDisk:
+#     pdName: postgres-disk
+#     fsType: ext4
+    
+# ---
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: postgres-pv-claim
+#   labels:
+#     app: postgres
+# spec:
+#   storageClassName: standard-rwo # for GCP
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 40Gi
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: postgres-pv-claim
+#   labels:
+#     app: postgres
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 40Gi
+#   storageClassName: ebs-csi-sc  # AWS EBS-backed StorageClass
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: postgres-pv-claim
+#   labels:
+#     app: postgres
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 40Gi
+#   storageClassName: gp2  # 🔹 Change from ebs-csi-sc to gp2
+
